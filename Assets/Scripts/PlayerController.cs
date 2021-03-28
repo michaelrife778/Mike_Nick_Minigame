@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         // Launches the player in the direction that the focal point is facing when they press spacebar
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playerRb.AddForce(focalPoint.transform.forward * Time.deltaTime * launchForce, ForceMode.Impulse);
+            playerRb.AddForce(focalPoint.transform.forward * launchForce, ForceMode.Impulse);
         }
     }
 }
