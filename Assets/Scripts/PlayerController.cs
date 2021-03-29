@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         // Sets the position of the focal point to the players position
         focalPoint.transform.position = transform.position;
         // Rotates the focal point
-        focalPoint.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+        focalPoint.transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed);
 
         // Launches the player in the direction that the focal point is facing when they press spacebar
         if (Input.GetKeyDown(KeyCode.Space))
