@@ -11,14 +11,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] platforms;
     private Vector3 offset = new Vector3(13.8f, -0.8f, 0.80f);
     private GameObject player;
-<<<<<<< Updated upstream
     public bool isGameActive;
     public GameObject titleScreen;
 
 
-=======
     private PlayerController playerController;
->>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +39,6 @@ public class GameManager : MonoBehaviour
         Instantiate(platforms[spawnIndex], platformTrigger.gameObject.transform.position + offset, platforms[spawnIndex].transform.rotation);        
     }
 
-<<<<<<< Updated upstream
     public void StartGame()
     {
         isGameActive = true;
@@ -50,10 +46,8 @@ public class GameManager : MonoBehaviour
         titleScreen.gameObject.SetActive(false);
     }
 
-    public void GameOver()
-=======
+
     private void CheckGameOver()
->>>>>>> Stashed changes
     {
         if (playerController.outOfBounds)
         {
