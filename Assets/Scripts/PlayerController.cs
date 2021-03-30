@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
+        CheckIFGameOver();
     }
 
     private void Movement()
@@ -46,6 +47,14 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.SpawnPlatform(other);
             other.gameObject.SetActive(false);
+        }
+    }
+
+    private void CheckIFGameOver()
+    {
+        if (transform.position.y < -5)
+        {
+            gameManager.health -= 1;
         }
     }
 }
