@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
    [SerializeField] private float rotationSpeed;
     [SerializeField] private float launchForce;
     private GameObject focalPoint;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         //Finds the FocalPoint in the scene and creates a reference
         focalPoint = GameObject.FindGameObjectWithTag("FocalPoint");
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playerRb.AddForce(focalPoint.transform.forward * launchForce, ForceMode.Impulse);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Platform Trigger"))
+        {
+            gameManager.SpawnPlatform(other);
+            other.gameObject.SetActive(false);
         }
     }
 }
