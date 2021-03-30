@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float launchForce;
     private GameObject focalPoint;
     private GameManager gameManager;
+    public bool outOfBounds = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
-        CheckIFGameOver();
+        OutOfBounds();
     }
 
     private void Movement()
@@ -50,11 +51,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CheckIFGameOver()
+    private void OutOfBounds()
     {
         if (transform.position.y < -5)
         {
-            gameManager.health -= 1;
+            outOfBounds = true;
         }
     }
+
+    
 }

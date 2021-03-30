@@ -11,20 +11,25 @@ public class GameManager : MonoBehaviour
     public GameObject[] platforms;
     private Vector3 offset = new Vector3(13.8f, -0.8f, 0.80f);
     private GameObject player;
+<<<<<<< Updated upstream
     public bool isGameActive;
     public GameObject titleScreen;
 
 
+=======
+    private PlayerController playerController;
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        CheckGameOver();
     }
 
     // this method is called in the player controller script 
@@ -37,6 +42,7 @@ public class GameManager : MonoBehaviour
         Instantiate(platforms[spawnIndex], platformTrigger.gameObject.transform.position + offset, platforms[spawnIndex].transform.rotation);        
     }
 
+<<<<<<< Updated upstream
     public void StartGame()
     {
         isGameActive = true;
@@ -45,14 +51,24 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver()
+=======
+    private void CheckGameOver()
+>>>>>>> Stashed changes
     {
-        if (health <= 0)
+        if (playerController.outOfBounds)
         {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            player.transform.position = new Vector3(32.09f, 1.02f, 0);
+            playerController.outOfBounds = false;
+            if (health == 0)
+            {
+                Time.timeScale = 0;
+                Debug.Log("Game Over");
+            }
+            else
+            {
+                player.transform.position = new Vector3(0, 0.538f, 0);
+                health -= 1;
+            }
+            
         }
     }
 
