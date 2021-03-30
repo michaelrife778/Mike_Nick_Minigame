@@ -29,4 +29,12 @@ public class GameManager : MonoBehaviour
     }
 
     
+    //Test comments
+    /*
+     * 
+     * Test
+     * 
+     * 
+     */
+
 }
