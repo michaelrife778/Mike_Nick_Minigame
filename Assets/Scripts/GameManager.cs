@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int health = 3;
+    [SerializeField] private int health = 3;
+    public int platformsReached;
+   [SerializeField] private int platformGoal;
     public GameObject[] platforms;
     private Vector3 offset = new Vector3(13.8f, -0.8f, 0.80f);
     private GameObject player;
@@ -32,11 +29,19 @@ public class GameManager : MonoBehaviour
     // this method is called in the player controller script 
     public void SpawnPlatform(Collider platformTrigger)
     {
-        int spawnIndex;
+        if (platformsReached < platformGoal)
+        {
+            int spawnIndex;
 
-        spawnIndex = Random.Range(0, platforms.Length);
-        // Spawns a random platform at the position of the platform trigger that the player collided with + an offset 
-        Instantiate(platforms[spawnIndex], platformTrigger.gameObject.transform.position + offset, platforms[spawnIndex].transform.rotation);        
+            spawnIndex = Random.Range(0, platforms.Length);
+            // Spawns a random platform at the position of the platform trigger that the player collided with + an offset 
+
+            Instantiate(platforms[spawnIndex], platformTrigger.gameObject.transform.position + offset, platforms[spawnIndex].transform.rotation);
+        }
+        else
+        {
+            WinGame();
+        }
     }
 
     public void StartGame()
@@ -47,32 +52,31 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void CheckGameOver()
+    public void DecreaseLives(int lives)
     {
-        if (playerController.outOfBounds)
+        if (playerController.isOutOfBounds)
         {
-            playerController.outOfBounds = false;
-            if (health == 0)
-            {
-                Time.timeScale = 0;
-                Debug.Log("Game Over");
-            }
-            else
-            {
-                player.transform.position = new Vector3(0, 0.538f, 0);
-                health -= 1;
-            }
-            
+            playerController.isOutOfBounds = false;
+            health -= lives;
         }
+
+        player.transform.position = new Vector3(0, 0.538f, 0);
+        
     }
 
+    private void CheckGameOver()
+    {
+        if (health == 0)
+        {
+            Time.timeScale = 0;
+        }
+        
+    } 
+
+    public void WinGame()
+    {
+        Debug.Log("You Win");
+    }
     
-    //Test comments
-    /*
-     * 
-     * Test
-     * 
-     * 
-     */
 
 }

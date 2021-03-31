@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 150
   launchForce: 13
+  isOutOfBounds: 0
 --- !u!54 &1254801364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -618,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 6428293216624846816, guid: d27c7d161c27c614da41346b699d6fab,
         type: 3}
       propertyPath: m_Name
-      value: WallPlatform (1)
+      value: StartingPlatform
       objectReference: {fileID: 0}
     - target: {fileID: 6428293216624846828, guid: d27c7d161c27c614da41346b699d6fab,
         type: 3}
@@ -720,10 +721,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5951b0b0c59af2c418f7bcb99dcee42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  platformsReached: 0
+  platformGoal: 3
   platforms:
   - {fileID: 6428293216624846816, guid: d27c7d161c27c614da41346b699d6fab, type: 3}
   - {fileID: 5256385250160570421, guid: 4cfa90d117189a540ae8864d2ab610d1, type: 3}
   - {fileID: 5702855688544168310, guid: c58bd40a67910d4499856665e16fc892, type: 3}
+  isGameActive: 0
+  titleScreen: {fileID: 0}
 --- !u!1 &1792600687
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +759,7 @@ Transform:
   m_Children:
   - {fileID: 1453381866}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &5256385251924100056
 PrefabInstance:
@@ -834,7 +840,7 @@ PrefabInstance:
     - target: {fileID: 5702855688544168306, guid: c58bd40a67910d4499856665e16fc892,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5702855688544168306, guid: c58bd40a67910d4499856665e16fc892,
         type: 3}

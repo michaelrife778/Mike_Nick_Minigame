@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float launchForce;
     private GameObject focalPoint;
     private GameManager gameManager;
-    public bool outOfBounds = false;
+    public bool isOutOfBounds;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +46,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Platform Trigger"))
         {
-            gameManager.SpawnPlatform(other);
+            gameManager.platformsReached += 1;
             other.gameObject.SetActive(false);
+            gameManager.SpawnPlatform(other);   
         }
     }
 
@@ -55,7 +56,8 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y < -5)
         {
-            outOfBounds = true;
+            isOutOfBounds = true;
+            gameManager.DecreaseLives(1);
         }
     }
 
