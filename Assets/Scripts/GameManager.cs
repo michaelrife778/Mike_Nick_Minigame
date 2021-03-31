@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,17 +9,19 @@ public class GameManager : MonoBehaviour
    [SerializeField] private int platformGoal;
     public GameObject[] platforms;
     private Vector3 offset = new Vector3(13.8f, -0.8f, 0.80f);
-    private GameObject player;
     public bool isGameActive;
     public GameObject titleScreen;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject winScreenUI;
+    [SerializeField] private TextMeshProUGUI livesText;
 
 
     private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        livesText.text = "Lives: " + health;
     }
 
     // Update is called once per frame
@@ -58,10 +62,8 @@ public class GameManager : MonoBehaviour
         {
             playerController.isOutOfBounds = false;
             health -= lives;
+            livesText.text = "Lives: " + health;
         }
-
-        player.transform.position = new Vector3(0, 0.538f, 0);
-        
     }
 
     private void CheckGameOver()
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         if (health == 0)
         {
             Time.timeScale = 0;
+            gameOverUI.SetActive(true);
         }
         
     } 
@@ -76,6 +79,16 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         Debug.Log("You Win");
+        Time.timeScale = 0;
+        winScreenUI.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        health = 3;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
     
 
