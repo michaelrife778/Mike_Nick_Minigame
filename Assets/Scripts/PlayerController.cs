@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     private GameObject focalPoint;
     private GameManager gameManager;
     public bool isOutOfBounds;
+    private AudioSource playerAudio;
+    public AudioClip jumpSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +22,8 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         //Finds the FocalPoint in the scene and creates a reference
         focalPoint = GameObject.FindGameObjectWithTag("FocalPoint");
+
+        playerAudio = GetComponent<AudioSource>();
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -40,6 +46,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playerRb.AddForce(focalPoint.transform.forward * launchForce, ForceMode.Impulse);
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
     }
     private void OnTriggerEnter(Collider other)
