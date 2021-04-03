@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         livesText.text = "Lives: " + health;
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -51,8 +52,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameActive = true;
-
         titleScreen.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
 
