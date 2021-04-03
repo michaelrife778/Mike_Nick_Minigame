@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private GameObject focalPoint;
     private GameManager gameManager;
     public bool isOutOfBounds;
+    private bool canJump = true;
     private AudioSource playerAudio;
     public AudioClip jumpSound;
 
@@ -43,8 +44,9 @@ public class PlayerController : MonoBehaviour
         focalPoint.transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed);
 
         // Launches the player in the direction that the focal point is facing when they press spacebar
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
+            StartCoroutine(JumpDelay());
             playerRb.AddForce(focalPoint.transform.forward * launchForce, ForceMode.Impulse);
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
@@ -67,6 +69,13 @@ public class PlayerController : MonoBehaviour
             gameManager.DecreaseLives(1);
            transform.position = new Vector3(0, 0.538f, 0);
         }
+    }
+
+    IEnumerator JumpDelay()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(1);
+        canJump = true;
     }
 
     
