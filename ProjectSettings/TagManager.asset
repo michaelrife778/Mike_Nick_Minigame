@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FocalPoint
   - Platform Trigger
+  - SpinPlatform
+  - SumoPlatform
   layers:
   - Default
   - TransparentFX

@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour
         {
             isOutOfBounds = true;
             gameManager.DecreaseLives(1);
-           transform.position = new Vector3(0, 0.538f, 0);
+            transform.position = new Vector3(0, 0.538f, 0);
+            playerRb.velocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
         }
     }
 
