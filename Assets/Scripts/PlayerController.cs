@@ -53,26 +53,36 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        // Checks to see if the object the player collided with is the platform trigger  
         if (other.CompareTag("Platform Trigger"))
         {
+            // Updates platform reached count
             gameManager.platformsReached += 1;
+            // disables the collider to avoid triggering twice 
             other.gameObject.SetActive(false);
+            // calls the spawn tower function in gameManager
             gameManager.SpawnPlatform(other);   
         }
     }
 
     private void OutOfBounds()
     {
+        // checks to see if the player fell
         if (transform.position.y < -5)
         {
+            // sets the out of bounds flag to true which gets set to false in decrease lives so that the code runs once.
             isOutOfBounds = true;
+            // decreases lives by 1
             gameManager.DecreaseLives(1);
+            // resets position of the player
             transform.position = new Vector3(0, 0.538f, 0);
+            // resets player velocity
             playerRb.velocity = Vector3.zero;
             playerRb.angularVelocity = Vector3.zero;
         }
     }
 
+    // adds a jump delay so that the player cant spam jump
     IEnumerator JumpDelay()
     {
         canJump = false;

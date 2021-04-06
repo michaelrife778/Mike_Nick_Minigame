@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     // this method is called in the player controller script 
     public void SpawnPlatform(Collider platformTrigger)
     {
+        // checks to see if the number of platforms reached is less then the platform goal
         if (platformsReached < platformGoal)
         {
             int spawnIndex;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerController.isOutOfBounds)
         {
+            // sets the out of bounds flag to false so that the code is only run once and then decreases the lives count;
             playerController.isOutOfBounds = false;
             health -= lives;
             livesText.text = "Lives: " + health;
